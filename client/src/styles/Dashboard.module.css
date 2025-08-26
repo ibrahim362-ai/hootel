@@ -1,0 +1,289 @@
+.dashboard {
+  @apply space-y-6;
+}
+
+/* KPI Cards */
+.kpiCard {
+  @apply bg-card rounded-2xl p-6 border border-border;
+  background: linear-gradient(135deg, hsl(221 83% 53% / 0.1) 0%, hsl(250 60% 65% / 0.05) 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kpiCard:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+}
+
+.metricIcon {
+  @apply p-3 rounded-xl;
+}
+
+.metricValue {
+  @apply text-2xl font-bold text-foreground mb-1;
+}
+
+.metricLabel {
+  @apply text-muted-foreground text-sm;
+}
+
+.progressBar {
+  @apply w-full bg-muted rounded-full h-2 mt-4;
+}
+
+.progressFill {
+  @apply bg-primary h-2 rounded-full transition-all duration-1000;
+}
+
+/* Charts Section */
+.chartContainer {
+  @apply bg-card rounded-2xl p-6 border border-border;
+}
+
+.chartHeader {
+  @apply flex items-center justify-between mb-6;
+}
+
+.chartTitle {
+  @apply text-lg font-semibold text-foreground;
+}
+
+.chartControls {
+  @apply flex space-x-2;
+}
+
+.chartButton {
+  @apply px-3 py-1 rounded-lg text-sm transition-colors;
+}
+
+.chartButton.active {
+  @apply bg-primary text-primary-foreground;
+}
+
+.chartButton.inactive {
+  @apply bg-muted text-muted-foreground hover:bg-muted/80;
+}
+
+/* Status Cards */
+.statusCard {
+  @apply flex items-center justify-between p-3 rounded-xl border transition-colors;
+}
+
+.statusCard.available {
+  @apply bg-green-50 border-green-200;
+}
+
+.statusCard.occupied {
+  @apply bg-blue-50 border-blue-200;
+}
+
+.statusCard.cleaning {
+  @apply bg-yellow-50 border-yellow-200;
+}
+
+.statusCard.maintenance {
+  @apply bg-red-50 border-red-200;
+}
+
+.statusIndicator {
+  @apply w-3 h-3 rounded-full;
+}
+
+.statusIndicator.available {
+  @apply bg-green-500;
+}
+
+.statusIndicator.occupied {
+  @apply bg-blue-500;
+}
+
+.statusIndicator.cleaning {
+  @apply bg-yellow-500;
+}
+
+.statusIndicator.maintenance {
+  @apply bg-red-500;
+}
+
+/* Action Cards */
+.actionCard {
+  @apply p-4 rounded-xl border border-border hover:border-primary hover:bg-primary/5 transition-all group cursor-pointer;
+}
+
+.actionIcon {
+  @apply text-primary text-xl mb-2 group-hover:scale-110 transition-transform;
+}
+
+.actionLabel {
+  @apply text-sm font-medium text-foreground;
+}
+
+/* Alert Cards */
+.alertCard {
+  @apply flex items-start space-x-3 p-3 rounded-lg border;
+}
+
+.alertCard.warning {
+  @apply bg-yellow-50 border-yellow-200;
+}
+
+.alertCard.info {
+  @apply bg-blue-50 border-blue-200;
+}
+
+.alertCard.success {
+  @apply bg-green-50 border-green-200;
+}
+
+.alertIcon {
+  @apply mt-1;
+}
+
+.alertIcon.warning {
+  @apply text-yellow-600;
+}
+
+.alertIcon.info {
+  @apply text-blue-600;
+}
+
+.alertIcon.success {
+  @apply text-green-600;
+}
+
+/* Table Section */
+.tableContainer {
+  @apply bg-card rounded-2xl border border-border overflow-hidden;
+}
+
+.tableHeader {
+  @apply p-6 border-b border-border;
+}
+
+.tableTitle {
+  @apply text-lg font-semibold text-foreground mb-4;
+}
+
+.tableControls {
+  @apply flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4;
+}
+
+.tableActions {
+  @apply flex space-x-2;
+}
+
+/* Responsive Grid */
+.gridContainer {
+  @apply grid gap-6;
+}
+
+.gridCols1 {
+  @apply grid-cols-1;
+}
+
+.gridCols2 {
+  @apply md:grid-cols-2;
+}
+
+.gridCols3 {
+  @apply lg:grid-cols-3;
+}
+
+.gridCols4 {
+  @apply md:grid-cols-2 lg:grid-cols-4;
+}
+
+/* Animations */
+.animateIn {
+  animation: animateIn 0.5s ease-in-out;
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Loading States */
+.shimmer {
+  background: linear-gradient(90deg, hsl(210 40% 96%) 25%, hsl(214 32% 91%) 50%, hsl(210 40% 96%) 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Dark mode adjustments */
+.dark .kpiCard {
+  background: linear-gradient(135deg, hsl(221 83% 53% / 0.2) 0%, hsl(250 60% 65% / 0.1) 100%);
+}
+
+.dark .statusCard.available {
+  @apply bg-green-900/20 border-green-800/30;
+}
+
+.dark .statusCard.occupied {
+  @apply bg-blue-900/20 border-blue-800/30;
+}
+
+.dark .statusCard.cleaning {
+  @apply bg-yellow-900/20 border-yellow-800/30;
+}
+
+.dark .statusCard.maintenance {
+  @apply bg-red-900/20 border-red-800/30;
+}
+
+.dark .alertCard.warning {
+  @apply bg-yellow-900/20 border-yellow-800/30;
+}
+
+.dark .alertCard.info {
+  @apply bg-blue-900/20 border-blue-800/30;
+}
+
+.dark .alertCard.success {
+  @apply bg-green-900/20 border-green-800/30;
+}
+
+.dark .shimmer {
+  background: linear-gradient(90deg, hsl(217 33% 17%) 25%, hsl(215 20% 65%) 50%, hsl(217 33% 17%) 75%);
+  background-size: 1000px 100%;
+}

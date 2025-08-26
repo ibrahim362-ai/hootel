@@ -1,0 +1,279 @@
+/* Global utility classes for the Hotel ERP system */
+
+/* Hide scrollbars globally */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom gradient backgrounds */
+.gradient-primary {
+  background: linear-gradient(135deg, hsl(221 83% 53%) 0%, hsl(250 60% 65%) 100%);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, hsl(221 83% 53% / 0.1) 0%, hsl(250 60% 65% / 0.05) 100%);
+}
+
+.gradient-card {
+  background: linear-gradient(135deg, hsl(221 83% 53% / 0.1) 0%, hsl(250 60% 65% / 0.05) 100%);
+}
+
+/* Glass morphism effects */
+.glass {
+  background: hsl(0 0% 100% / 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid hsl(0 0% 100% / 0.18);
+}
+
+.glass-dark {
+  background: hsl(222 84% 5% / 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid hsl(210 40% 98% / 0.18);
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Shimmer loading effect */
+.shimmer {
+  background: linear-gradient(90deg, hsl(210 40% 96%) 25%, hsl(214 32% 91%) 50%, hsl(210 40% 96%) 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Role indicator animation */
+.role-indicator {
+  position: relative;
+  overflow: hidden;
+}
+
+.role-indicator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.role-indicator:hover::before {
+  left: 100%;
+}
+
+/* Custom animations */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s infinite;
+}
+
+@keyframes fadeIn {
+  0% { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes slideUp {
+  0% { 
+    transform: translateY(100%); 
+  }
+  100% { 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes slideDown {
+  0% { 
+    transform: translateY(-100%); 
+  }
+  100% { 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes shimmer {
+  0% { 
+    background-position: -1000px 0; 
+  }
+  100% { 
+    background-position: 1000px 0; 
+  }
+}
+
+/* Status colors */
+.status-available {
+  @apply bg-green-100 text-green-800 border-green-200;
+}
+
+.status-occupied {
+  @apply bg-blue-100 text-blue-800 border-blue-200;
+}
+
+.status-cleaning {
+  @apply bg-yellow-100 text-yellow-800 border-yellow-200;
+}
+
+.status-maintenance {
+  @apply bg-red-100 text-red-800 border-red-200;
+}
+
+.status-confirmed {
+  @apply bg-green-100 text-green-800 border-green-200;
+}
+
+.status-pending {
+  @apply bg-yellow-100 text-yellow-800 border-yellow-200;
+}
+
+.status-cancelled {
+  @apply bg-red-100 text-red-800 border-red-200;
+}
+
+/* Dark mode status colors */
+.dark .status-available {
+  @apply bg-green-900/20 text-green-300 border-green-800/30;
+}
+
+.dark .status-occupied {
+  @apply bg-blue-900/20 text-blue-300 border-blue-800/30;
+}
+
+.dark .status-cleaning {
+  @apply bg-yellow-900/20 text-yellow-300 border-yellow-800/30;
+}
+
+.dark .status-maintenance {
+  @apply bg-red-900/20 text-red-300 border-red-800/30;
+}
+
+.dark .status-confirmed {
+  @apply bg-green-900/20 text-green-300 border-green-800/30;
+}
+
+.dark .status-pending {
+  @apply bg-yellow-900/20 text-yellow-300 border-yellow-800/30;
+}
+
+.dark .status-cancelled {
+  @apply bg-red-900/20 text-red-300 border-red-800/30;
+}
+
+/* Responsive utilities */
+.container-responsive {
+  @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Card shadows */
+.shadow-card {
+  box-shadow: 0 1px 3px 0 hsl(221 83% 53% / 0.1), 0 1px 2px 0 hsl(221 83% 53% / 0.06);
+}
+
+.shadow-card-hover {
+  box-shadow: 0 20px 25px -5px hsl(221 83% 53% / 0.1), 0 10px 10px -5px hsl(221 83% 53% / 0.04);
+}
+
+/* Text utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+}
+
+/* Button variants */
+.btn-gradient {
+  @apply gradient-primary text-white border-0 hover:opacity-90 transition-opacity;
+}
+
+.btn-glass {
+  @apply glass text-foreground hover:bg-white/30 transition-all;
+}
+
+/* Loading skeleton */
+.skeleton {
+  @apply animate-pulse bg-muted rounded;
+}
+
+/* Notification styles */
+.notification-enter {
+  @apply animate-slide-down;
+}
+
+.notification-exit {
+  @apply animate-slide-up;
+}
+
+/* Mobile-first responsive breakpoints */
+@media (max-width: 640px) {
+  .mobile-stack {
+    @apply flex-col space-y-4 space-x-0;
+  }
+}
+
+@media (min-width: 641px) {
+  .mobile-stack {
+    @apply flex-row space-y-0 space-x-4;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .hover-lift:hover {
+    outline: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-slide-down,
+  .hover-lift,
+  .shimmer,
+  .role-indicator::before {
+    animation: none;
+    transition: none;
+  }
+}
