@@ -1,0 +1,66 @@
+Got it 👍 You want a **React Router–based frontend skeleton** with these requirements:
+
+* **Admin routes** → `/admin/...` (full control, all modules).
+* **Employer routes** → separated by domain:
+
+  * `/employer/rooms/...` → Employer Rooms Dashboard & modules
+  * `/employer/restaurant/...` → Employer Restaurant Dashboard & modules
+  * `/employer/gym/...` → Employer Gym Dashboard & modules
+* **Public (User/Guest) routes** → accessible without login → `/` (Home + all guest modules).
+
+I’ll write you a **prompt** that defines the **file structure, routing, role separation, and skeleton pages**.
+
+---
+
+# 📝 Full Prompt (React + React Router + CSS Modules)
+
+```
+I want to build a **Hotel ERP frontend** in **React + React Router + CSS Modules** with role-based routing.  
+
+Please create a **project skeleton** with the following structure and routes:
+
+---
+
+## Routes
+
+1. **Admin (`/admin`)**
+   - `/admin/dashboard`
+   - `/admin/rooms`
+   - `/admin/restaurant`
+   - `/admin/gym`
+   - `/admin/crm`
+   - `/admin/property`
+   - `/admin/staff`
+   - `/admin/reports`
+   - `/admin/settings`
+
+2. **Employer (Staff controllers)**
+   - **Rooms Staff**
+     - `/employer/rooms/dashboard`
+     - `/employer/rooms/tasks`
+     - `/employer/rooms/shifts`
+   - **Restaurant Staff**
+     - `/employer/restaurant/dashboard`
+     - `/employer/restaurant/orders`
+     - `/employer/restaurant/inventory`
+   - **Gym Staff**
+     - `/employer/gym/dashboard`
+     - `/employer/gym/trainer-schedule`
+     - `/employer/gym/classes`
+
+3. **Public (User/Guest)**
+   - `/` → Home
+   - `/rooms` → Browse + Book rooms
+   - `/restaurant` → Menu + My Orders
+   - `/gym` → Class schedule
+   - `/rewards` → Loyalty & CRM
+   - `/profile` → User profile
+
+│
+✅ Deliverables in this skeleton:
+
+* **Admin pages** → all modules
+* **Employer pages** → separated controllers (Rooms, Restaurant, Gym)
+* **User (Public)** → Home + services booking
+* **Folder structure** ready for scaling
+* **React Router v6** based route definitions
