@@ -572,7 +572,7 @@ export default function AdminReports() {
                 Occupancy Report
               </Button>
               <Button className="w-full justify-start" variant="outline" data-testid="button-efficiency-report">
-                <FaTrendingUp className="mr-2" />
+                <FaArrowUp className="mr-2" />
                 Efficiency Analysis
               </Button>
               <Button className="w-full justify-start" variant="outline" data-testid="button-service-quality">
