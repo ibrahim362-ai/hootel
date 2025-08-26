@@ -1,0 +1,158 @@
+Perfect ✅ Let’s create a **full prompt** you can use to generate or guide the **frontend structure** for your **Hotel ERP system** with **role-based interfaces** (Admin, Employer, User) in **React + CSS Modules**. I’ll give it **all details**, including modules, pages, components, and folder structure. You can feed this prompt to a dev assistant or AI code generator.
+
+---
+
+# 📝 Full Prompt for Hotel ERP Frontend (React + CSS Modules)
+
+```
+I want to build a **Hotel ERP web frontend** using **React** and **CSS Modules**, with **role-based interfaces** for Admin, Employer, and User. The frontend should be scalable, modular, and organized. Please design the **folder structure, pages, components, and routing** in full detail, based on the following requirements:
+
+---
+
+## Roles and Interfaces
+
+1. **Admin** – full access
+   - Modules: Dashboard, Rooms, Restaurant, Gym, CRM, Property, Staff, Reports, Settings
+   - Pages:
+     - Dashboard: charts & KPIs
+     - Rooms: Rooms list, Room details, Booking form
+     - Restaurant: Menu management, Orders, Inventory
+     - Gym: Memberships, Classes, Equipment
+     - CRM: Customers, Campaigns, Feedback
+     - Property: Assets, Maintenance, Vendors
+     - Staff: Staff list, Ratings, Shifts
+     - Reports: Revenue, Occupancy, Staff performance
+     - Settings: System configuration, user roles
+
+2. **Employer** – limited access for staff
+   - Modules: Rooms, Restaurant, Gym, Tasks, Shifts, Profile
+   - Pages:
+     - Rooms: assigned room tasks
+     - Restaurant: Orders (Waiter view)
+     - Gym: Trainer schedule
+     - Tasks: assigned tasks
+     - Shifts: my shifts
+     - Profile: view/update profile
+
+3. **User (Guest)** – customer interface
+   - Modules: Rooms, Restaurant, Gym, CRM, Profile
+   - Pages:
+     - Home
+     - Rooms: browse & book
+     - Restaurant: menu, order
+     - Gym: class schedule
+     - CRM: rewards, feedback
+     - Profile
+
+---
+
+## Folder Structure (React + CSS Modules)
+
+```
+
+src/
+│── assets/                  # Images, icons, fonts
+│── styles/                  # Global CSS + variables
+│   └── variables.css
+│
+│── components/              # Shared UI components
+│   ├── layout/              # Header, Sidebar, Footer
+│   ├── ui/                  # Button, Input, Modal, Card
+│   ├── charts/              # BarChart, PieChart, LineChart
+│   ├── tables/              # DataTable
+│
+│── pages/
+│   ├── auth/                # Login, Register, ForgotPassword
+│   ├── admin/               # Admin dashboard & modules
+│   │   ├── Dashboard
+│   │   ├── Rooms
+│   │   ├── Restaurant
+│   │   ├── Gym
+│   │   ├── CRM
+│   │   ├── Property
+│   │   ├── Staff
+│   │   ├── Reports
+│   │   ├── Settings
+│   ├── employer/            # Staff limited modules
+│   │   ├── Dashboard
+│   │   ├── Rooms
+│   │   ├── Restaurant
+│   │   ├── Gym
+│   │   ├── Tasks
+│   │   ├── Shifts
+│   │   ├── Profile
+│   ├── user/                # Guest modules
+│   │   ├── Home
+│   │   ├── Rooms
+│   │   ├── Restaurant
+│   │   ├── Gym
+│   │   ├── CRM
+│   │   ├── Profile
+│
+│── context/                # Auth + Role context
+│── hooks/                  # Custom hooks
+│── utils/                  # Helper functions
+│── routes.js               # Role-based routing
+│── App.jsx
+│── index.js
+
+```
+
+---
+
+## Components
+
+1. **Layout Components**
+   - Header
+   - Sidebar (role-based menus)
+   - Footer
+
+2. **UI Components**
+   - Button
+   - Input
+   - Modal
+   - Card
+   - Notification / Toast
+
+3. **Data Display**
+   - DataTable
+   - Charts (BarChart, PieChart, LineChart)
+
+---
+
+## Routing
+
+- Use **React Router** for role-based routing:
+  - `/admin/*` → Admin pages
+  - `/employer/*` → Employer pages
+  - `/user/*` → User pages
+- Protect routes using **AuthContext** and **RoleContext**.
+
+---
+
+## Styling
+
+- Use **CSS Modules** for all components and pages.
+- Maintain **one global variables.css** for colors, spacing, and fonts.
+
+---
+
+## Extras
+
+- Include **sidebar menus per role**:
+  - Admin: Dashboard, Rooms, Restaurant, Gym, CRM, Property, Staff, Reports, Settings
+  - Employer: Dashboard, Rooms, Restaurant Orders, Gym Schedule, Tasks, Shifts, Profile
+  - User: Home, Rooms, Restaurant, Gym, Rewards, Profile
+- Provide **starter skeleton for each page** with placeholders for components.
+- Ensure **scalability** for adding more modules later (POS, IoT, notifications).
+
+---
+
+Please output a **complete React frontend skeleton** with this structure, all components, pages, CSS module placeholders, and role-based routing logic.
+```
+
+---
+
+If you want, I can **turn this prompt into an actual ready-to-use React project skeleton**, with **folder structure, starter pages, role-based sidebar, and sample CSS Modules**, so you can immediately start development.
+
+Do you want me to do that next?
