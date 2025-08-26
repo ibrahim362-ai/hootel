@@ -24,6 +24,7 @@ import EmployerDashboard from "@/pages/employer/Dashboard";
 import EmployerTasks from "@/pages/employer/Tasks";
 import EmployerShifts from "@/pages/employer/Shifts";
 import EmployerProfile from "@/pages/employer/Profile";
+import EmployerProperty from "@/pages/employer/Property";
 
 // User Pages
 import UserHome from "@/pages/user/Home";
@@ -32,6 +33,7 @@ import UserRestaurant from "@/pages/user/Restaurant";
 import UserGym from "@/pages/user/Gym";
 import UserCRM from "@/pages/user/CRM";
 import UserProfile from "@/pages/user/Profile";
+import UserProperty from "@/pages/user/Property";
 
 // Protected Route Component
 function ProtectedRoute({ children, requiredRole }: { children: React.ReactNode; requiredRole?: string }) {
@@ -162,6 +164,11 @@ function Router() {
           <EmployerProfile />
         </ProtectedRoute>
       </Route>
+      <Route path="/employer/property">
+        <ProtectedRoute requiredRole="employer">
+          <EmployerProperty />
+        </ProtectedRoute>
+      </Route>
 
       {/* User Routes */}
       <Route path="/user/home">
@@ -192,6 +199,11 @@ function Router() {
       <Route path="/user/profile">
         <ProtectedRoute requiredRole="user">
           <UserProfile />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/user/property">
+        <ProtectedRoute requiredRole="user">
+          <UserProperty />
         </ProtectedRoute>
       </Route>
 
