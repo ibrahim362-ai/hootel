@@ -31,7 +31,7 @@ Design Preferences: Modern 2025 design with #3a86ff gradient color theme, CSS mo
 
 ### Role-Based Access Control
 - **Admin Role**: Full system access including dashboard, rooms, restaurant, gym, CRM, property, staff, reports, and settings
-- **Employer Role**: Limited staff access for task management, shifts, and assigned responsibilities
+- **Employer Role**: Comprehensive staff interface with three specialized controllers - Rooms (housekeeping/maintenance), Restaurant (orders/inventory), and Gym (classes/training) operations
 - **User Role**: Guest interface for bookings, restaurant orders, gym schedules, and profile management
 
 ### Data Models
@@ -51,7 +51,11 @@ The system uses a comprehensive database schema including:
 - **Charts**: Custom data visualization components with animation support
 - **Tables**: Advanced data tables with sorting, filtering, and export capabilities
 - **Forms**: Type-safe form components with validation
-- **User Interface Pages**: Home (hero section with animated features), Rooms (booking widget with filters), Restaurant (menu system with cart), Gym (fitness classes and facilities), Rewards/CRM, Profile settings
+- **User Interface Pages**: Home (hero section with animated features), Rooms (booking widget with filters), Restaurant (menu system with cart), Gym (fitness classes and facilities), Profile settings
+- **Employer Interface Pages**: 
+  - Rooms Controller: Dashboard, Tasks, Shifts (housekeeping and front desk operations)
+  - Restaurant Controller: Dashboard, Orders, Inventory (restaurant staff management)
+  - Gym Controller: Dashboard, TrainerSchedule, Classes (fitness facility operations)
 
 ### Development Features
 - **Hot Module Replacement**: Vite development server with fast refresh

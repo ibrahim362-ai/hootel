@@ -26,6 +26,21 @@ import EmployerShifts from "@/pages/employer/Shifts";
 import EmployerProfile from "@/pages/employer/Profile";
 import EmployerProperty from "@/pages/employer/Property";
 
+// Employer Rooms
+import EmployerRoomsDashboard from "@/pages/employer/rooms/Dashboard";
+import EmployerRoomsTasks from "@/pages/employer/rooms/Tasks";
+import EmployerRoomsShifts from "@/pages/employer/rooms/Shifts";
+
+// Employer Restaurant
+import EmployerRestaurantDashboard from "@/pages/employer/restaurant/Dashboard";
+import EmployerRestaurantOrders from "@/pages/employer/restaurant/Orders";
+import EmployerRestaurantInventory from "@/pages/employer/restaurant/Inventory";
+
+// Employer Gym
+import EmployerGymDashboard from "@/pages/employer/gym/Dashboard";
+import EmployerGymTrainerSchedule from "@/pages/employer/gym/TrainerSchedule";
+import EmployerGymClasses from "@/pages/employer/gym/Classes";
+
 // User Pages
 import UserHome from "@/pages/user/Home";
 import UserRooms from "@/pages/user/Rooms";
@@ -166,6 +181,57 @@ function Router() {
       <Route path="/employer/property">
         <ProtectedRoute requiredRole="employer">
           <EmployerProperty />
+        </ProtectedRoute>
+      </Route>
+
+      {/* Employer Rooms Routes */}
+      <Route path="/employer/rooms/dashboard">
+        <ProtectedRoute requiredRole="employer">
+          <EmployerRoomsDashboard />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/employer/rooms/tasks">
+        <ProtectedRoute requiredRole="employer">
+          <EmployerRoomsTasks />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/employer/rooms/shifts">
+        <ProtectedRoute requiredRole="employer">
+          <EmployerRoomsShifts />
+        </ProtectedRoute>
+      </Route>
+
+      {/* Employer Restaurant Routes */}
+      <Route path="/employer/restaurant/dashboard">
+        <ProtectedRoute requiredRole="employer">
+          <EmployerRestaurantDashboard />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/employer/restaurant/orders">
+        <ProtectedRoute requiredRole="employer">
+          <EmployerRestaurantOrders />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/employer/restaurant/inventory">
+        <ProtectedRoute requiredRole="employer">
+          <EmployerRestaurantInventory />
+        </ProtectedRoute>
+      </Route>
+
+      {/* Employer Gym Routes */}
+      <Route path="/employer/gym/dashboard">
+        <ProtectedRoute requiredRole="employer">
+          <EmployerGymDashboard />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/employer/gym/trainer-schedule">
+        <ProtectedRoute requiredRole="employer">
+          <EmployerGymTrainerSchedule />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/employer/gym/classes">
+        <ProtectedRoute requiredRole="employer">
+          <EmployerGymClasses />
         </ProtectedRoute>
       </Route>
 
