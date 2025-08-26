@@ -27,8 +27,7 @@ export default function Footer() {
     { href: '/', label: 'Home', icon: FaBed },
     { href: '/user/rooms', label: 'Rooms & Suites', icon: FaBed },
     { href: '/user/restaurant', label: 'Dining', icon: FaUtensils },
-    { href: '/user/gym', label: 'Fitness & Spa', icon: FaDumbbell },
-    { href: '/user/crm', label: 'Rewards Program', icon: FaGift }
+    { href: '/user/gym', label: 'Fitness & Spa', icon: FaDumbbell }
   ];
 
   const services = [

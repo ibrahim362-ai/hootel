@@ -14,7 +14,6 @@ export default function Navbar() {
     { path: '/user/rooms', label: 'Rooms', icon: FaBed },
     { path: '/user/restaurant', label: 'Restaurant', icon: FaUtensils },
     { path: '/user/gym', label: 'Gym', icon: FaDumbbell },
-    { path: '/user/crm', label: 'Rewards', icon: FaGift },
     { path: '/user/profile', label: 'Profile', icon: FaUser }
   ];
 
