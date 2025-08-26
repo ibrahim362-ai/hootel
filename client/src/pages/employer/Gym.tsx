@@ -429,9 +429,12 @@ export default function EmployerGym() {
                     >
                       <div className="flex items-center space-x-4">
                         <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center">
-                          {React.createElement(classTypeIcons[session.type as keyof typeof classTypeIcons] || FaDumbbell, {
-                            className: "text-white text-lg"
-                          })}
+                          {session.type === 'cardio' && <FaRunning className="text-white text-lg" />}
+                          {session.type === 'strength' && <FaDumbbell className="text-white text-lg" />}
+                          {session.type === 'swimming' && <FaSwimmer className="text-white text-lg" />}
+                          {session.type === 'yoga' && <FaHeartbeat className="text-white text-lg" />}
+                          {session.type === 'group' && <FaUsers className="text-white text-lg" />}
+                          {!['cardio', 'strength', 'swimming', 'yoga', 'group'].includes(session.type) && <FaDumbbell className="text-white text-lg" />}
                         </div>
                         <div>
                           <h4 className="font-semibold">{session.className}</h4>
