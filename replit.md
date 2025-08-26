@@ -7,17 +7,20 @@ This is a comprehensive Hotel ERP (Enterprise Resource Planning) web application
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Design Preferences: Modern 2025 design with #3a86ff gradient color theme, CSS modules, Framer Motion animations, responsive design for desktop and mobile, glass morphism effects, and smooth transitions.
 
 ## System Architecture
 
 ### Frontend Architecture
 - **Framework**: React with TypeScript using Vite as the build tool
 - **UI Components**: Radix UI components with shadcn/ui design system
-- **Styling**: Tailwind CSS with CSS Modules for component-specific styles
+- **Styling**: Tailwind CSS with CSS Modules for component-specific styles (#3a86ff gradient theme)
 - **State Management**: Context API for authentication and role management, TanStack Query for server state
 - **Routing**: Wouter for lightweight client-side routing
 - **Forms**: React Hook Form with Zod validation
-- **Animation**: Framer Motion for smooth UI transitions
+- **Animation**: Framer Motion for smooth UI transitions with spring physics and staggered animations
+- **User Interface**: Complete User (Public/Guest) interface with Navbar, Footer, and UserLayout components
+- **Design System**: Modern 2025 design with glass morphism effects, gradient animations, hover effects, and responsive grid systems
 
 ### Backend Architecture
 - **Runtime**: Node.js with Express.js framework
@@ -41,11 +44,14 @@ The system uses a comprehensive database schema including:
 - **Shifts**: Schedule management for employees
 
 ### Component Structure
-- **Layout Components**: Responsive sidebar navigation, header with search and user menu
-- **UI Components**: Reusable components using Radix UI primitives
+- **Layout Components**: 
+  - Admin/Employer: Responsive sidebar navigation, header with search and user menu
+  - User/Guest: Modern Navbar with glassmorphism effects, comprehensive Footer with social links and newsletter signup, UserLayout wrapper
+- **UI Components**: Reusable components using Radix UI primitives with modern CSS modules styling
 - **Charts**: Custom data visualization components with animation support
 - **Tables**: Advanced data tables with sorting, filtering, and export capabilities
 - **Forms**: Type-safe form components with validation
+- **User Interface Pages**: Home (hero section with animated features), Rooms (booking widget with filters), Restaurant (menu system with cart), Gym (fitness classes and facilities), Rewards/CRM, Profile settings
 
 ### Development Features
 - **Hot Module Replacement**: Vite development server with fast refresh
@@ -73,9 +79,11 @@ The system uses a comprehensive database schema including:
 ### UI and Styling
 - **class-variance-authority**: Type-safe variant API for components
 - **tailwind-merge**: Utility for merging Tailwind CSS classes
-- **lucide-react**: Icon library
+- **react-icons/fa**: Font Awesome icon library for comprehensive icon coverage
 - **react-hook-form**: Form handling with validation
 - **zod**: Schema validation library
+- **CSS Modules**: Modern component-specific styling with #3a86ff gradient theme
+- **Design Features**: Glass morphism effects, gradient animations, hover effects, responsive grid systems, smooth transitions, and mobile-responsive design
 
 ### Database and Storage
 - **connect-pg-simple**: PostgreSQL session store

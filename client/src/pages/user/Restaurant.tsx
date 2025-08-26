@@ -1,310 +1,597 @@
-import { Layout } from '@/components/layout/Layout';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { motion } from 'framer-motion';
-import { FaUtensils, FaStar, FaClock, FaDollarSign, FaLeaf, FaFire, FaSnowflake, FaPlus, FaMinus, FaShoppingCart } from 'react-icons/fa';
+import { Input } from '@/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { FaUtensils, FaSearch, FaHeart, FaShoppingCart, FaStar, FaClock, FaMapMarkerAlt, FaPhone, FaWineGlass, FaCoffee, FaIceCream, FaLeaf, FaFire, FaBan } from 'react-icons/fa';
+import UserLayout from '@/components/layout/UserLayout';
+import styles from '@/styles/modern.module.css';
 
-export default function UserRestaurant() {
-  const menuCategories = [
+export default function Restaurant() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [cart, setCart] = useState<{[key: number]: number}>({});
+  const [favorites, setFavorites] = useState<number[]>([]);
+
+  const restaurants = [
     {
-      name: "Appetizers",
-      items: [
-        {
-          id: 1,
-          name: "Truffle Arancini",
-          description: "Crispy risotto balls with truffle oil, parmesan, and fresh herbs",
-          price: 16,
-          dietary: ["vegetarian"],
-          spiceLevel: 0,
-          rating: 4.8,
-          popular: true
-        },
-        {
-          id: 2,
-          name: "Seared Scallops",
-          description: "Pan-seared scallops with cauliflower puree and pancetta chips",
-          price: 24,
-          dietary: ["gluten-free"],
-          spiceLevel: 0,
-          rating: 4.9,
-          popular: false
-        }
-      ]
+      id: 1,
+      name: "Azure Fine Dining",
+      cuisine: "Modern European",
+      rating: 4.9,
+      reviews: 234,
+      priceRange: "$$$",
+      location: "Main Building - Level 2",
+      hours: "6:00 PM - 11:00 PM",
+      phone: "+1 (555) 123-4567",
+      description: "Experience culinary artistry with our award-winning chef's contemporary European creations.",
+      image: "/images/azure-restaurant.jpg",
+      specialties: ["Tasting Menu", "Wine Pairing", "Chef's Special"],
+      ambiance: "Elegant & Romantic"
     },
     {
-      name: "Main Courses",
-      items: [
-        {
-          id: 3,
-          name: "Wagyu Beef Tenderloin",
-          description: "8oz prime wagyu with roasted vegetables and red wine reduction",
-          price: 65,
-          dietary: ["gluten-free"],
-          spiceLevel: 0,
-          rating: 5.0,
-          popular: true
-        },
-        {
-          id: 4,
-          name: "Mediterranean Sea Bass",
-          description: "Grilled sea bass with olive tapenade, cherry tomatoes, and herb oil",
-          price: 42,
-          dietary: ["gluten-free", "healthy"],
-          spiceLevel: 1,
-          rating: 4.7,
-          popular: true
-        },
-        {
-          id: 5,
-          name: "Vegan Buddha Bowl",
-          description: "Quinoa, roasted vegetables, avocado, and tahini dressing",
-          price: 28,
-          dietary: ["vegan", "gluten-free", "healthy"],
-          spiceLevel: 0,
-          rating: 4.6,
-          popular: false
-        }
-      ]
+      id: 2,
+      name: "Ocean Breeze Cafe",
+      cuisine: "Mediterranean",
+      rating: 4.7,
+      reviews: 456,
+      priceRange: "$$",
+      location: "Poolside Terrace",
+      hours: "7:00 AM - 10:00 PM",
+      phone: "+1 (555) 123-4568",
+      description: "Fresh Mediterranean flavors with stunning ocean views and casual elegance.",
+      image: "/images/ocean-cafe.jpg",
+      specialties: ["Fresh Seafood", "Grilled Dishes", "Healthy Options"],
+      ambiance: "Casual & Scenic"
     },
     {
-      name: "Desserts",
-      items: [
-        {
-          id: 6,
-          name: "Chocolate Lava Cake",
-          description: "Warm chocolate cake with molten center and vanilla ice cream",
-          price: 14,
-          dietary: ["vegetarian"],
-          spiceLevel: 0,
-          rating: 4.9,
-          popular: true
-        }
-      ]
+      id: 3,
+      name: "The Grand Lobby Bar",
+      cuisine: "Bar & Lounge",
+      rating: 4.8,
+      reviews: 189,
+      priceRange: "$$",
+      location: "Main Lobby",
+      hours: "4:00 PM - 2:00 AM",
+      phone: "+1 (555) 123-4569",
+      description: "Sophisticated cocktails and light bites in our elegant lobby setting.",
+      image: "/images/lobby-bar.jpg",
+      specialties: ["Craft Cocktails", "Premium Spirits", "Light Appetizers"],
+      ambiance: "Sophisticated & Social"
     }
   ];
 
-  const dietaryIcons = {
-    vegetarian: { icon: FaLeaf, color: "text-green-600", label: "Vegetarian" },
-    vegan: { icon: FaLeaf, color: "text-green-700", label: "Vegan" },
-    "gluten-free": { icon: FaSnowflake, color: "text-blue-600", label: "Gluten Free" },
-    healthy: { icon: FaLeaf, color: "text-emerald-600", label: "Healthy Choice" }
+  const menuCategories = [
+    { id: 'appetizers', name: 'Appetizers', icon: FaUtensils },
+    { id: 'mains', name: 'Main Courses', icon: FaUtensils },
+    { id: 'desserts', name: 'Desserts', icon: FaIceCream },
+    { id: 'beverages', name: 'Beverages', icon: FaCoffee },
+    { id: 'wine', name: 'Wine & Spirits', icon: FaWineGlass }
+  ];
+
+  const menuItems = [
+    {
+      id: 1,
+      name: "Truffle Arancini",
+      category: "appetizers",
+      restaurant: "Azure Fine Dining",
+      price: 24,
+      description: "Crispy risotto balls filled with truffle and parmesan, served with roasted tomato sauce",
+      image: "/images/truffle-arancini.jpg",
+      rating: 4.8,
+      reviews: 67,
+      dietary: ["vegetarian"],
+      prepTime: "15 min",
+      spicyLevel: 0,
+      popular: true
+    },
+    {
+      id: 2,
+      name: "Pan-Seared Halibut",
+      category: "mains",
+      restaurant: "Azure Fine Dining",
+      price: 48,
+      description: "Fresh halibut with cauliflower puree, roasted vegetables, and lemon herb butter",
+      image: "/images/halibut.jpg",
+      rating: 4.9,
+      reviews: 89,
+      dietary: ["gluten-free"],
+      prepTime: "25 min",
+      spicyLevel: 0,
+      popular: true
+    },
+    {
+      id: 3,
+      name: "Mediterranean Mezze Platter",
+      category: "appetizers",
+      restaurant: "Ocean Breeze Cafe",
+      price: 22,
+      description: "Hummus, tapenade, grilled vegetables, olives, and warm pita bread",
+      image: "/images/mezze.jpg",
+      rating: 4.7,
+      reviews: 134,
+      dietary: ["vegetarian", "vegan"],
+      prepTime: "10 min",
+      spicyLevel: 1,
+      popular: true
+    },
+    {
+      id: 4,
+      name: "Grilled Branzino",
+      category: "mains",
+      restaurant: "Ocean Breeze Cafe",
+      price: 36,
+      description: "Whole grilled Mediterranean sea bass with lemon, herbs, and olive oil",
+      image: "/images/branzino.jpg",
+      rating: 4.8,
+      reviews: 156,
+      dietary: ["gluten-free"],
+      prepTime: "20 min",
+      spicyLevel: 0,
+      popular: false
+    },
+    {
+      id: 5,
+      name: "Chocolate Lava Cake",
+      category: "desserts",
+      restaurant: "Azure Fine Dining",
+      price: 16,
+      description: "Warm chocolate cake with molten center, vanilla ice cream, and berry coulis",
+      image: "/images/lava-cake.jpg",
+      rating: 4.9,
+      reviews: 203,
+      dietary: ["vegetarian"],
+      prepTime: "18 min",
+      spicyLevel: 0,
+      popular: true
+    },
+    {
+      id: 6,
+      name: "Signature Martini",
+      category: "beverages",
+      restaurant: "The Grand Lobby Bar",
+      price: 18,
+      description: "Premium gin or vodka with our house-made vermouth and garnish selection",
+      image: "/images/martini.jpg",
+      rating: 4.8,
+      reviews: 78,
+      dietary: [],
+      prepTime: "5 min",
+      spicyLevel: 0,
+      popular: true
+    }
+  ];
+
+  const filteredItems = menuItems.filter(item => {
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         item.restaurant.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
+    
+    return matchesSearch && matchesCategory;
+  });
+
+  const addToCart = (itemId: number) => {
+    setCart(prev => ({
+      ...prev,
+      [itemId]: (prev[itemId] || 0) + 1
+    }));
   };
 
-  const restaurantInfo = {
-    hours: {
-      breakfast: "6:30 AM - 11:00 AM",
-      lunch: "12:00 PM - 3:00 PM", 
-      dinner: "6:00 PM - 10:00 PM"
-    },
-    contact: "+1 (555) 123-4567 Ext. 2",
-    location: "Main Lobby Level",
-    reservations: "Recommended for dinner service"
+  const removeFromCart = (itemId: number) => {
+    setCart(prev => {
+      const newCart = { ...prev };
+      if (newCart[itemId] > 1) {
+        newCart[itemId]--;
+      } else {
+        delete newCart[itemId];
+      }
+      return newCart;
+    });
+  };
+
+  const toggleFavorite = (itemId: number) => {
+    setFavorites(prev => 
+      prev.includes(itemId) 
+        ? prev.filter(id => id !== itemId)
+        : [...prev, itemId]
+    );
+  };
+
+  const getTotalItems = () => {
+    return Object.values(cart).reduce((sum, count) => sum + count, 0);
+  };
+
+  const getTotalPrice = () => {
+    return Object.entries(cart).reduce((total, [itemId, count]) => {
+      const item = menuItems.find(i => i.id === parseInt(itemId));
+      return total + (item ? item.price * count : 0);
+    }, 0);
+  };
+
+  const getDietaryIcon = (dietary: string) => {
+    switch (dietary) {
+      case 'vegetarian': return <FaLeaf className="text-green-500" />;
+      case 'vegan': return <FaLeaf className="text-green-600" />;
+      case 'gluten-free': return <FaBan className="text-orange-500" />;
+      default: return null;
+    }
+  };
+
+  const getSpicyLevel = (level: number) => {
+    return Array.from({ length: 3 }, (_, i) => (
+      <FaFire 
+        key={i} 
+        className={i < level ? 'text-red-500' : 'text-gray-300'} 
+      />
+    ));
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 24
+      }
+    }
   };
 
   return (
-    <Layout 
-      title="Azure Restaurant & Bar" 
-      subtitle="Fine dining experience with fresh, locally-sourced ingredients and exceptional service"
-    >
-      <div className="space-y-6">
-        {/* Restaurant Information Banner */}
-        <Card className="bg-gradient-to-r from-orange-50 to-red-50 border-0">
-          <CardContent className="p-6">
-            <div className="grid md:grid-cols-2 gap-6 items-center">
-              <div>
-                <div className="flex items-center mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <FaStar key={i} className="text-yellow-500 mr-1" />
-                  ))}
-                  <span className="ml-2 text-sm text-gray-600">Michelin Recommended</span>
-                </div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Award-Winning Cuisine</h2>
-                <p className="text-muted-foreground mb-4">
-                  Experience culinary excellence with our chef's seasonal menu featuring the finest ingredients
-                  from local farms and sustainable sources.
-                </p>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <strong>Breakfast:</strong> {restaurantInfo.hours.breakfast}
-                  </div>
-                  <div>
-                    <strong>Lunch:</strong> {restaurantInfo.hours.lunch}
-                  </div>
-                  <div>
-                    <strong>Dinner:</strong> {restaurantInfo.hours.dinner}
-                  </div>
-                  <div>
-                    <strong>Reservations:</strong> {restaurantInfo.contact}
-                  </div>
-                </div>
-              </div>
-              <div className="text-center">
-                <h3 className="text-xl font-semibold mb-4">Today's Special</h3>
-                <div className="bg-white p-4 rounded-lg border">
-                  <h4 className="font-bold text-lg mb-2">Chef's Tasting Menu</h4>
-                  <p className="text-muted-foreground mb-3">5-course seasonal experience</p>
-                  <div className="text-2xl font-bold text-primary mb-3">$95 per person</div>
-                  <Button className="gradient-primary text-white" data-testid="button-tasting-menu">
-                    Reserve Now
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+    <UserLayout>
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
+        {/* Hero Section */}
+        <motion.section
+          className={`${styles.heroSection} relative py-20 px-4`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-red-600 to-orange-800 opacity-90"></div>
+          <div className="relative z-10 max-w-6xl mx-auto text-center text-white">
+            <motion.h1 
+              className="text-5xl lg:text-6xl font-bold mb-6"
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+            >
+              Exceptional Dining
+            </motion.h1>
+            <motion.p 
+              className="text-xl lg:text-2xl mb-8 text-orange-100"
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
+              Savor culinary masterpieces crafted by world-renowned chefs in our elegant restaurants
+            </motion.p>
+          </div>
+        </motion.section>
 
-        {/* Menu Categories */}
-        {menuCategories.map((category, categoryIndex) => (
-          <motion.div
-            key={category.name}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * categoryIndex }}
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <FaUtensils className="mr-2 text-primary" />
-                  {category.name}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  {category.items.map((item, itemIndex) => (
+        {/* Search and Cart */}
+        <section className="py-8 px-4 bg-white/80 backdrop-blur-sm border-b border-orange-200">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+              <div className="relative flex-1 max-w-md">
+                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <Input
+                  placeholder="Search menu items..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 h-12 border-orange-200 focus:border-orange-500"
+                />
+              </div>
+              
+              {getTotalItems() > 0 && (
+                <Button className={`${styles.modernButton} ${styles.buttonPrimary} relative`}>
+                  <FaShoppingCart className="mr-2" />
+                  Cart ({getTotalItems()}) - ${getTotalPrice()}
+                  <Badge className="absolute -top-2 -right-2 bg-red-500 text-white">
+                    {getTotalItems()}
+                  </Badge>
+                </Button>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* Restaurants Overview */}
+        <section className="py-12 px-4">
+          <div className="max-w-6xl mx-auto">
+            <motion.h2 
+              className="text-3xl font-bold text-center mb-12 text-gray-800"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              Our Restaurants
+            </motion.h2>
+            
+            <motion.div
+              className="grid lg:grid-cols-3 gap-8 mb-16"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {restaurants.map((restaurant) => (
+                <motion.div
+                  key={restaurant.id}
+                  variants={itemVariants}
+                  className={`${styles.modernCard} overflow-hidden`}
+                  whileHover={{ y: -4 }}
+                >
+                  <div className="h-48 bg-gradient-to-br from-orange-100 to-red-100 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-red-500 opacity-80"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <FaUtensils className="text-5xl text-white opacity-50" />
+                    </div>
+                  </div>
+                  
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-3">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-800 mb-1">{restaurant.name}</h3>
+                        <p className="text-orange-600 font-semibold">{restaurant.cuisine}</p>
+                      </div>
+                      <div className="text-right">
+                        <div className="flex items-center gap-1 text-yellow-500 mb-1">
+                          <FaStar />
+                          <span className="text-sm font-bold text-gray-700">{restaurant.rating}</span>
+                          <span className="text-xs text-gray-500">({restaurant.reviews})</span>
+                        </div>
+                        <Badge variant="outline" className="text-orange-600 border-orange-200">
+                          {restaurant.priceRange}
+                        </Badge>
+                      </div>
+                    </div>
+                    
+                    <p className="text-gray-600 text-sm mb-4">{restaurant.description}</p>
+                    
+                    <div className="space-y-2 text-sm text-gray-600 mb-4">
+                      <div className="flex items-center gap-2">
+                        <FaMapMarkerAlt className="text-orange-500" />
+                        <span>{restaurant.location}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <FaClock className="text-orange-500" />
+                        <span>{restaurant.hours}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <FaPhone className="text-orange-500" />
+                        <span>{restaurant.phone}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="mb-4">
+                      <p className="text-xs text-gray-500 mb-2">Specialties:</p>
+                      <div className="flex flex-wrap gap-1">
+                        {restaurant.specialties.map((specialty, index) => (
+                          <Badge key={index} variant="outline" className="text-xs border-orange-200 text-orange-600">
+                            {specialty}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" className="flex-1 border-orange-200 text-orange-600 hover:bg-orange-50">
+                        View Menu
+                      </Button>
+                      <Button className={`${styles.modernButton} ${styles.buttonPrimary} flex-1`}>
+                        Reserve Table
+                      </Button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Menu Section */}
+        <section className="py-12 px-4 bg-white/80 backdrop-blur-sm">
+          <div className="max-w-6xl mx-auto">
+            <motion.h2 
+              className="text-3xl font-bold text-center mb-12 text-gray-800"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Our Menu
+            </motion.h2>
+
+            <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
+              <TabsList className="grid w-full grid-cols-6 mb-8 bg-orange-50 border border-orange-200">
+                <TabsTrigger value="all" className="data-[state=active]:bg-orange-600 data-[state=active]:text-white">
+                  All Items
+                </TabsTrigger>
+                {menuCategories.map((category) => (
+                  <TabsTrigger 
+                    key={category.id} 
+                    value={category.id}
+                    className="data-[state=active]:bg-orange-600 data-[state=active]:text-white"
+                  >
+                    <category.icon className="mr-2" />
+                    {category.name}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+
+              <TabsContent value={selectedCategory} className="space-y-6">
+                <motion.div
+                  className="grid lg:grid-cols-2 gap-6"
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {filteredItems.map((item) => (
                     <motion.div
                       key={item.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 * (categoryIndex + itemIndex) }}
-                      className="flex justify-between items-start border-b pb-4 last:border-b-0"
+                      variants={itemVariants}
+                      className={`${styles.modernCard} overflow-hidden`}
+                      whileHover={{ y: -2 }}
                     >
-                      <div className="flex-1 pr-4">
-                        <div className="flex items-center mb-2">
-                          <h4 className="text-lg font-semibold">{item.name}</h4>
+                      <div className="flex gap-4 p-6">
+                        <div className="w-32 h-32 bg-gradient-to-br from-orange-100 to-red-100 rounded-lg flex-shrink-0 relative overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-red-500 opacity-80"></div>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <FaUtensils className="text-2xl text-white opacity-50" />
+                          </div>
                           {item.popular && (
-                            <Badge className="ml-2 bg-orange-100 text-orange-800">Popular</Badge>
-                          )}
-                          {item.spiceLevel > 0 && (
-                            <div className="ml-2 flex">
-                              {[...Array(item.spiceLevel)].map((_, i) => (
-                                <FaFire key={i} className="text-red-500 text-xs" />
-                              ))}
-                            </div>
+                            <Badge className="absolute top-2 left-2 bg-red-500 text-white text-xs">
+                              Popular
+                            </Badge>
                           )}
                         </div>
                         
-                        <p className="text-muted-foreground mb-3">{item.description}</p>
-                        
-                        <div className="flex items-center space-x-4 mb-2">
-                          <div className="flex items-center">
-                            {[...Array(5)].map((_, i) => (
-                              <FaStar 
-                                key={i} 
-                                className={i < Math.floor(item.rating) ? "text-yellow-500 text-xs" : "text-gray-300 text-xs"} 
-                              />
-                            ))}
-                            <span className="ml-1 text-xs text-gray-600">({item.rating})</span>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex justify-between items-start mb-2">
+                            <div className="flex-1">
+                              <h3 className="text-lg font-bold text-gray-800 mb-1">{item.name}</h3>
+                              <p className="text-sm text-orange-600 font-medium">{item.restaurant}</p>
+                            </div>
+                            <div className="flex gap-2 ml-4">
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => toggleFavorite(item.id)}
+                                className="border-orange-200 hover:bg-orange-50"
+                              >
+                                <FaHeart className={favorites.includes(item.id) ? 'text-red-500' : 'text-gray-400'} />
+                              </Button>
+                            </div>
                           </div>
                           
-                          <div className="flex space-x-2">
-                            {item.dietary.map((diet) => {
-                              const dietInfo = dietaryIcons[diet as keyof typeof dietaryIcons];
-                              return (
-                                <div 
-                                  key={diet} 
-                                  className="flex items-center text-xs"
-                                  title={dietInfo?.label}
-                                >
-                                  <dietInfo.icon className={`${dietInfo?.color} mr-1`} />
-                                  <span className="text-gray-600">{dietInfo?.label}</span>
-                                </div>
-                              );
-                            })}
+                          <p className="text-gray-600 text-sm mb-3 line-clamp-2">{item.description}</p>
+                          
+                          <div className="flex items-center gap-4 mb-3 text-xs text-gray-500">
+                            <div className="flex items-center gap-1">
+                              <FaStar className="text-yellow-500" />
+                              <span>{item.rating}</span>
+                              <span>({item.reviews})</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <FaClock />
+                              <span>{item.prepTime}</span>
+                            </div>
+                            {item.spicyLevel > 0 && (
+                              <div className="flex items-center gap-1">
+                                {getSpicyLevel(item.spicyLevel)}
+                              </div>
+                            )}
                           </div>
-                        </div>
-                      </div>
-                      
-                      <div className="text-right">
-                        <div className="text-xl font-bold text-primary mb-3">${item.price}</div>
-                        <div className="flex items-center space-x-2">
-                          <Button size="sm" variant="outline" data-testid={`button-decrease-${item.id}`}>
-                            <FaMinus className="h-3 w-3" />
-                          </Button>
-                          <span className="w-8 text-center">0</span>
-                          <Button size="sm" variant="outline" data-testid={`button-increase-${item.id}`}>
-                            <FaPlus className="h-3 w-3" />
-                          </Button>
+                          
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                              <span className="text-xl font-bold text-orange-600">${item.price}</span>
+                              <div className="flex gap-1">
+                                {item.dietary.map((diet, index) => (
+                                  <span key={index} title={diet}>
+                                    {getDietaryIcon(diet)}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-2">
+                              {cart[item.id] && (
+                                <div className="flex items-center gap-2">
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={() => removeFromCart(item.id)}
+                                    className="w-8 h-8 p-0 border-orange-200"
+                                  >
+                                    -
+                                  </Button>
+                                  <span className="text-sm font-medium w-6 text-center">{cart[item.id]}</span>
+                                </div>
+                              )}
+                              <Button
+                                size="sm"
+                                onClick={() => addToCart(item.id)}
+                                className={`${styles.modernButton} ${styles.buttonPrimary}`}
+                              >
+                                <FaShoppingCart className="mr-1" />
+                                {cart[item.id] ? '+' : 'Add'}
+                              </Button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </motion.div>
                   ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
+                </motion.div>
+                
+                {filteredItems.length === 0 && (
+                  <motion.div 
+                    className="text-center py-12"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                  >
+                    <FaUtensils className="text-6xl text-gray-300 mx-auto mb-4" />
+                    <h3 className="text-xl font-semibold text-gray-700 mb-2">No items found</h3>
+                    <p className="text-gray-500">Try adjusting your search criteria.</p>
+                  </motion.div>
+                )}
+              </TabsContent>
+            </Tabs>
+          </div>
+        </section>
 
-        {/* Order Summary and Information */}
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card className="bg-green-50 border-green-200">
-            <CardHeader>
-              <CardTitle className="text-green-800 flex items-center">
-                <FaShoppingCart className="mr-2" />
-                Your Order
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-8">
-                <FaShoppingCart className="text-4xl text-gray-400 mx-auto mb-4" />
-                <p className="text-muted-foreground mb-4">Your cart is empty</p>
-                <p className="text-sm text-muted-foreground">Add items from the menu to get started</p>
-              </div>
-              <div className="border-t pt-4">
-                <Button className="w-full gradient-primary text-white" disabled data-testid="button-place-order">
-                  Place Order ($0.00)
-                </Button>
-                <p className="text-xs text-center text-muted-foreground mt-2">
-                  Room service available 24/7 • Delivery fee $5
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Important Information</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <h4 className="font-semibold mb-2">Dining Options</h4>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Dine-in restaurant service</li>
-                  <li>• In-room dining (24/7 available)</li>
-                  <li>• Poolside service (11 AM - 8 PM)</li>
-                  <li>• Private dining for events</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2">Allergen Information</h4>
-                <p className="text-sm text-muted-foreground">
-                  Please inform our staff of any allergies or dietary restrictions. 
-                  All dishes may contain traces of nuts, dairy, or gluten.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2">Payment & Charges</h4>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• All prices include tax</li>
-                  <li>• 18% service charge for groups 6+</li>
-                  <li>• Room service delivery fee: $5</li>
-                  <li>• Charges applied to room account</li>
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Call to Action */}
+        <section className="py-16 px-4 bg-gradient-to-r from-orange-600 to-red-600 text-white">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.h2 
+              className="text-3xl lg:text-4xl font-bold mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Experience Culinary Excellence
+            </motion.h2>
+            <motion.p 
+              className="text-xl mb-8 text-orange-100"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              Make a reservation today and indulge in our world-class dining experiences
+            </motion.p>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <Button size="lg" className="bg-white text-orange-600 hover:bg-orange-50">
+                <FaPhone className="mr-2" />
+                Make Reservation
+              </Button>
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                <FaWineGlass className="mr-2" />
+                View Wine List
+              </Button>
+            </motion.div>
+          </div>
+        </section>
       </div>
-    </Layout>
+    </UserLayout>
   );
 }

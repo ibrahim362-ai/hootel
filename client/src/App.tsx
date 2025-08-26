@@ -33,7 +33,6 @@ import UserRestaurant from "@/pages/user/Restaurant";
 import UserGym from "@/pages/user/Gym";
 import UserCRM from "@/pages/user/CRM";
 import UserProfile from "@/pages/user/Profile";
-import UserProperty from "@/pages/user/Property";
 
 // Protected Route Component
 function ProtectedRoute({ children, requiredRole }: { children: React.ReactNode; requiredRole?: string }) {
@@ -201,11 +200,7 @@ function Router() {
           <UserProfile />
         </ProtectedRoute>
       </Route>
-      <Route path="/user/property">
-        <ProtectedRoute requiredRole="user">
-          <UserProperty />
-        </ProtectedRoute>
-      </Route>
+
 
       {/* Shared routes accessible by multiple roles */}
       <Route path="/rooms">

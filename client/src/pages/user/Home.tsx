@@ -1,4 +1,4 @@
-import { Layout } from '@/components/layout/Layout';
+import UserLayout from '@/components/layout/UserLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -78,10 +78,7 @@ export default function UserHome() {
   };
 
   return (
-    <Layout 
-      title="Welcome to Grand Palace Hotel" 
-      subtitle="Experience luxury, comfort, and exceptional service in the heart of the city"
-    >
+    <UserLayout>
       <div className="min-h-screen space-y-8">
         {/* Hero Section */}
         <motion.section
@@ -424,6 +421,6 @@ export default function UserHome() {
           </div>
         </motion.section>
       </div>
-    </Layout>
+    </UserLayout>
   );
 }
