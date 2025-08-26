@@ -100,7 +100,7 @@ export default function UserHome() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
-              <FaConcierge className="mr-2 text-primary" />
+              <FaUser className="mr-2 text-primary" />
               Hotel Amenities & Services
             </CardTitle>
           </CardHeader>

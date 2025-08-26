@@ -614,7 +614,7 @@ export default function UserProfile() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-center mb-4">
-                    <Badge className={tierColors[loyaltyInfo.tier as keyof typeof tierColors]} className="text-lg px-4 py-2">
+                    <Badge className={`${tierColors[loyaltyInfo.tier as keyof typeof tierColors]} text-lg px-4 py-2`}>
                       <FaCrown className="mr-2" />
                       {loyaltyInfo.tier}
                     </Badge>
