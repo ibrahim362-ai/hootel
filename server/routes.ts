@@ -162,8 +162,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       const todayBookings = bookings.filter(b => {
         const today = new Date();
-        const bookingDate = new Date(b.createdAt);
-        return bookingDate.toDateString() === today.toDateString();
+        const bookingDate = b.createdAt ? new Date(b.createdAt) : null;
+        return bookingDate ? bookingDate.toDateString() === today.toDateString() : false;
       });
       
       const todayRevenue = todayBookings.reduce((sum, booking) => {

@@ -131,6 +131,7 @@ export class MemStorage implements IStorage {
       ...insertUser, 
       id,
       createdAt: new Date(),
+      role: insertUser.role || 'user',
     };
     this.users.set(id, user);
     return user;
@@ -156,7 +157,11 @@ export class MemStorage implements IStorage {
 
   async createRoom(insertRoom: InsertRoom): Promise<Room> {
     const id = randomUUID();
-    const room: Room = { ...insertRoom, id };
+    const room: Room = { 
+      ...insertRoom, 
+      id,
+      status: insertRoom.status || 'available',
+    };
     this.rooms.set(id, room);
     return room;
   }
@@ -189,6 +194,9 @@ export class MemStorage implements IStorage {
       ...insertBooking, 
       id,
       createdAt: new Date(),
+      status: insertBooking.status || 'pending',
+      userId: insertBooking.userId || null,
+      roomId: insertBooking.roomId || null,
     };
     this.bookings.set(id, booking);
     return booking;
@@ -218,7 +226,13 @@ export class MemStorage implements IStorage {
 
   async createStaffMember(insertStaff: InsertStaff): Promise<Staff> {
     const id = randomUUID();
-    const staff: Staff = { ...insertStaff, id };
+    const staff: Staff = { 
+      ...insertStaff, 
+      id,
+      userId: insertStaff.userId || null,
+      rating: insertStaff.rating || null,
+      isActive: insertStaff.isActive || null,
+    };
     this.staff.set(id, staff);
     return staff;
   }
@@ -251,6 +265,11 @@ export class MemStorage implements IStorage {
       ...insertTask, 
       id,
       createdAt: new Date(),
+      description: insertTask.description || null,
+      status: insertTask.status || 'pending',
+      staffId: insertTask.staffId || null,
+      priority: insertTask.priority || 'medium',
+      dueDate: insertTask.dueDate || null,
     };
     this.tasks.set(id, task);
     return task;
@@ -280,7 +299,12 @@ export class MemStorage implements IStorage {
 
   async createShift(insertShift: InsertShift): Promise<Shift> {
     const id = randomUUID();
-    const shift: Shift = { ...insertShift, id };
+    const shift: Shift = { 
+      ...insertShift, 
+      id,
+      status: insertShift.status || 'scheduled',
+      staffId: insertShift.staffId || null,
+    };
     this.shifts.set(id, shift);
     return shift;
   }

@@ -13,7 +13,7 @@ import {
   RefreshCw,
   Bell,
 } from "lucide-react";
-import { FaUtensils, FaCoffee, FaWineGlass, FaCake } from "react-icons/fa";
+import { FaUtensils, FaCoffee, FaWineGlass } from "react-icons/fa";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -135,7 +135,7 @@ export default function EmployerRestaurant() {
     {
       key: "order",
       label: "Order",
-      render: (_, order: any) => (
+      render: (_: unknown, order: any) => (
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
             <UtensilsCrossed className="h-5 w-5 text-white" />
@@ -150,7 +150,7 @@ export default function EmployerRestaurant() {
     {
       key: "customer",
       label: "Customer",
-      render: (_, order: any) => (
+      render: (_: unknown, order: any) => (
         <div className="flex items-center space-x-2">
           <Avatar className="h-8 w-8">
             <AvatarFallback className="bg-primary/10 text-primary text-xs">
@@ -164,7 +164,7 @@ export default function EmployerRestaurant() {
     {
       key: "items",
       label: "Items",
-      render: (_, order: any) => (
+      render: (_: unknown, order: any) => (
         <div className="text-sm">
           <p className="font-medium">{order.items.length} item(s)</p>
           <p className="text-muted-foreground truncate max-w-xs">
@@ -176,7 +176,7 @@ export default function EmployerRestaurant() {
     {
       key: "total",
       label: "Total",
-      render: (_, order: any) => (
+      render: (_: unknown, order: any) => (
         <div className="flex items-center space-x-1">
           <DollarSign className="h-4 w-4 text-muted-foreground" />
           <span className="font-semibold">${order.total}</span>
@@ -186,7 +186,7 @@ export default function EmployerRestaurant() {
     {
       key: "status",
       label: "Status",
-      render: (_, order: any) => (
+      render: (_: unknown, order: any) => (
         <Badge className={orderStatusColors[order.status as keyof typeof orderStatusColors]}>
           {order.status}
         </Badge>
@@ -195,7 +195,7 @@ export default function EmployerRestaurant() {
     {
       key: "priority",
       label: "Priority",
-      render: (_, order: any) => (
+      render: (_: unknown, order: any) => (
         <Badge className={priorityColors[order.priority as keyof typeof priorityColors]}>
           {order.priority}
         </Badge>
@@ -204,7 +204,7 @@ export default function EmployerRestaurant() {
     {
       key: "time",
       label: "Time",
-      render: (_, order: any) => (
+      render: (_: unknown, order: any) => (
         <div className="text-sm">
           <div className="flex items-center space-x-1">
             <Clock className="h-3 w-3 text-muted-foreground" />
@@ -219,7 +219,7 @@ export default function EmployerRestaurant() {
     {
       key: "actions",
       label: "Actions",
-      render: (_, order: any) => (
+      render: (_: unknown, order: any) => (
         <div className="flex space-x-2">
           {order.status === "pending" && (
             <Button 

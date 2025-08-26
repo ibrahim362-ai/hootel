@@ -17,11 +17,11 @@ import {
 import { Layout } from '@/components/layout/Layout';
 import { BarChart } from '@/components/charts/BarChart';
 import { DonutChart } from '@/components/charts/DonutChart';
-import { DataTable } from '@/components/tables/DataTable';
+import DataTable from '@/components/tables/DataTable';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import styles from '@/styles/Dashboard.module.css';
 
 interface DashboardMetrics {

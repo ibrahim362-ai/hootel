@@ -22,7 +22,7 @@ interface DataTableProps {
   className?: string;
 }
 
-export function DataTable({ 
+export default function DataTable({ 
   columns, 
   data, 
   title, 

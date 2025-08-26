@@ -104,3 +104,33 @@ export type InsertTask = z.infer<typeof insertTaskSchema>;
 export type Task = typeof tasks.$inferSelect;
 export type InsertShift = z.infer<typeof insertShiftSchema>;
 export type Shift = typeof shifts.$inferSelect;
+
+// Additional types for Restaurant and Gym features
+export interface MenuItem {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  isAvailable: boolean;
+}
+
+export interface Order {
+  id: string;
+  menuItems: MenuItem[];
+  totalAmount: number;
+  status: 'pending' | 'preparing' | 'ready' | 'delivered';
+  orderTime: Date;
+  tableNumber?: string;
+  customerName?: string;
+}
+
+export interface GymMembership {
+  id: string;
+  userId: string;
+  membershipType: 'basic' | 'premium' | 'vip';
+  startDate: Date;
+  endDate: Date;
+  status: 'active' | 'expired' | 'suspended';
+  paymentStatus: 'paid' | 'pending' | 'overdue';
+}

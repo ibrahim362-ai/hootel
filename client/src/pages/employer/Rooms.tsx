@@ -146,7 +146,7 @@ export default function EmployerRooms() {
     {
       key: "room",
       label: "Room",
-      render: (_, task: any) => {
+      render: (_: unknown, task: any) => {
         const TypeIcon = taskTypeIcons[task.type as keyof typeof taskTypeIcons] || FaBed;
         return (
           <div className="flex items-center space-x-3">
@@ -164,7 +164,7 @@ export default function EmployerRooms() {
     {
       key: "priority",
       label: "Priority",
-      render: (_, task: any) => (
+      render: (_: unknown, task: any) => (
         <Badge className={priorityColors[task.priority as keyof typeof priorityColors]}>
           {task.priority}
         </Badge>
@@ -173,7 +173,7 @@ export default function EmployerRooms() {
     {
       key: "status",
       label: "Status",
-      render: (_, task: any) => (
+      render: (_: unknown, task: any) => (
         <Badge className={taskStatusColors[task.status as keyof typeof taskStatusColors]}>
           {task.status.replace("_", " ")}
         </Badge>
@@ -182,7 +182,7 @@ export default function EmployerRooms() {
     {
       key: "timing",
       label: "Timing",
-      render: (_, task: any) => (
+      render: (_: unknown, task: any) => (
         <div className="text-sm">
           <div className="flex items-center space-x-1">
             <Clock className="h-3 w-3 text-muted-foreground" />
@@ -198,7 +198,7 @@ export default function EmployerRooms() {
     {
       key: "guest",
       label: "Guest Schedule",
-      render: (_, task: any) => (
+      render: (_: unknown, task: any) => (
         <div className="text-sm">
           {task.guestCheckOut && (
             <div>Check-out: {new Date(task.guestCheckOut).toLocaleTimeString()}</div>
@@ -212,14 +212,14 @@ export default function EmployerRooms() {
     {
       key: "notes",
       label: "Notes",
-      render: (_, task: any) => (
+      render: (_: unknown, task: any) => (
         <p className="text-sm max-w-xs truncate">{task.notes}</p>
       ),
     },
     {
       key: "actions",
       label: "Actions",
-      render: (_, task: any) => (
+      render: (_: unknown, task: any) => (
         <div className="flex space-x-2">
           {task.status === "pending" && (
             <Button size="sm" variant="outline" data-testid={`button-start-task-${task.id}`}>

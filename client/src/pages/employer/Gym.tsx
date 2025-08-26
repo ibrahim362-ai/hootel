@@ -162,7 +162,7 @@ export default function EmployerGym() {
     {
       key: "class",
       label: "Class",
-      render: (_, session: any) => {
+      render: (_: unknown, session: any) => {
         const TypeIcon = classTypeIcons[session.type as keyof typeof classTypeIcons] || FaDumbbell;
         return (
           <div className="flex items-center space-x-3">
@@ -180,7 +180,7 @@ export default function EmployerGym() {
     {
       key: "time",
       label: "Time",
-      render: (_, session: any) => (
+      render: (_: unknown, session: any) => (
         <div className="flex items-center space-x-1">
           <Clock className="h-4 w-4 text-muted-foreground" />
           <span className="text-sm font-medium">{session.time}</span>
@@ -190,7 +190,7 @@ export default function EmployerGym() {
     {
       key: "capacity",
       label: "Participants",
-      render: (_, session: any) => (
+      render: (_: unknown, session: any) => (
         <div>
           <p className="text-sm font-medium">{session.enrolled}/{session.capacity}</p>
           <div className="w-20 bg-gray-200 rounded-full h-2 mt-1">
