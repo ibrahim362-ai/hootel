@@ -1,0 +1,111 @@
+Got it 👍 You want a **React Router–based frontend skeleton** with these requirements:
+
+* **Admin routes** → `/admin/...` (full control, all modules).
+* **Employer routes** → separated by domain:
+
+  * `/employer/rooms/...` → Employer Rooms Dashboard & modules
+  * `/employer/restaurant/...` → Employer Restaurant Dashboard & modules
+  * `/employer/gym/...` → Employer Gym Dashboard & modules
+* **Public (User/Guest) routes** → accessible without login → `/` (Home + all guest modules).
+
+I’ll write you a **prompt** that defines the **file structure, routing, role separation, and skeleton pages**.
+
+---
+
+# 📝 Full Prompt (React + React Router + CSS Modules)
+
+```
+I want to build a **Hotel ERP frontend** in **React + React Router + CSS Modules** with role-based routing.  
+
+Please create a **project skeleton** with the following structure and routes:
+
+---
+
+## Routes
+
+1. **Admin (`/admin`)**
+   - `/admin/dashboard`
+   - `/admin/rooms`
+   - `/admin/restaurant`
+   - `/admin/gym`
+   - `/admin/crm`
+   - `/admin/property`
+   - `/admin/staff`
+   - `/admin/reports`
+   - `/admin/settings`
+
+2. **Employer (Staff controllers)**
+   - **Rooms Staff**
+     - `/employer/rooms/dashboard`
+     - `/employer/rooms/tasks`
+     - `/employer/rooms/shifts`
+   - **Restaurant Staff**
+     - `/employer/restaurant/dashboard`
+     - `/employer/restaurant/orders`
+     - `/employer/restaurant/inventory`
+   - **Gym Staff**
+     - `/employer/gym/dashboard`
+     - `/employer/gym/trainer-schedule`
+     - `/employer/gym/classes`
+
+3. **Public (User/Guest)**
+   - `/` → Home
+   - `/rooms` → Browse + Book rooms
+   - `/restaurant` → Menu + My Orders
+   - `/gym` → Class schedule
+   - `/rewards` → Loyalty & CRM
+   - `/profile` → User profile
+
+---
+
+## Folder Structure
+
+src/
+│── assets/                  # images, icons
+│── styles/                  # global CSS
+│   └── variables.css
+│
+│── components/              # reusable UI
+│   ├── layout/              # Header, Sidebar, Footer
+│   ├── ui/                  # Button, Input, Card, Modal
+│
+│── pages/
+│   ├── auth/                # Login, Register
+│   ├── admin/               # Admin full modules
+│   │   ├── Dashboard.jsx
+│   │   ├── Rooms.jsx
+│   │   ├── Restaurant.jsx
+│   │   ├── Gym.jsx
+│   │   ├── CRM.jsx
+│   │   ├── Property.jsx
+│   │   ├── Staff.jsx
+│   │   ├── Reports.jsx
+│   │   ├── Settings.jsx
+│   ├── employer/
+│   │   ├── rooms/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Tasks.jsx
+│   │   │   ├── Shifts.jsx
+│   │   ├── restaurant/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Orders.jsx
+│   │   │   ├── Inventory.jsx
+│   │   ├── gym/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── TrainerSchedule.jsx
+│   │   │   ├── Classes.jsx
+│   ├── user/
+│   │   ├── Home.jsx
+│   │   ├── Rooms.jsx
+│   │   ├── Restaurant.jsx
+│   │   ├── Gym.jsx
+│   │   ├── Rewards.jsx
+│   │   ├── Profile.jsx
+│
+✅ Deliverables in this skeleton:
+
+* **Admin pages** → all modules
+* **Employer pages** → separated controllers (Rooms, Restaurant, Gym)
+* **User (Public)** → Home + services booking
+* **Folder structure** ready for scaling
+* **React Router v6** based route definitions

@@ -1,0 +1,198 @@
+Got it 👍 You want a **React Router–based frontend skeleton** with these requirements:
+
+* **Admin routes** → `/admin/...` (full control, all modules).
+* **Employer routes** → separated by domain:
+
+  * `/employer/rooms/...` → Employer Rooms Dashboard & modules
+  * `/employer/restaurant/...` → Employer Restaurant Dashboard & modules
+  * `/employer/gym/...` → Employer Gym Dashboard & modules
+* **Public (User/Guest) routes** → accessible without login → `/` (Home + all guest modules).
+
+I’ll write you a **prompt** that defines the **file structure, routing, role separation, and skeleton pages**.
+
+---
+
+# 📝 Full Prompt (React + React Router + CSS Modules)
+
+```
+I want to build a **Hotel ERP frontend** in **React + React Router + CSS Modules** with role-based routing.  
+
+Please create a **project skeleton** with the following structure and routes:
+
+---
+
+## Routes
+
+1. **Admin (`/admin`)**
+   - `/admin/dashboard`
+   - `/admin/rooms`
+   - `/admin/restaurant`
+   - `/admin/gym`
+   - `/admin/crm`
+   - `/admin/property`
+   - `/admin/staff`
+   - `/admin/reports`
+   - `/admin/settings`
+
+2. **Employer (Staff controllers)**
+   - **Rooms Staff**
+     - `/employer/rooms/dashboard`
+     - `/employer/rooms/tasks`
+     - `/employer/rooms/shifts`
+   - **Restaurant Staff**
+     - `/employer/restaurant/dashboard`
+     - `/employer/restaurant/orders`
+     - `/employer/restaurant/inventory`
+   - **Gym Staff**
+     - `/employer/gym/dashboard`
+     - `/employer/gym/trainer-schedule`
+     - `/employer/gym/classes`
+
+3. **Public (User/Guest)**
+   - `/` → Home
+   - `/rooms` → Browse + Book rooms
+   - `/restaurant` → Menu + My Orders
+   - `/gym` → Class schedule
+   - `/rewards` → Loyalty & CRM
+   - `/profile` → User profile
+
+---
+
+## Folder Structure
+
+src/
+│── assets/                  # images, icons
+│── styles/                  # global CSS
+│   └── variables.css
+│
+│── components/              # reusable UI
+│   ├── layout/              # Header, Sidebar, Footer
+│   ├── ui/                  # Button, Input, Card, Modal
+│
+│── pages/
+│   ├── auth/                # Login, Register
+│   ├── admin/               # Admin full modules
+│   │   ├── Dashboard.jsx
+│   │   ├── Rooms.jsx
+│   │   ├── Restaurant.jsx
+│   │   ├── Gym.jsx
+│   │   ├── CRM.jsx
+│   │   ├── Property.jsx
+│   │   ├── Staff.jsx
+│   │   ├── Reports.jsx
+│   │   ├── Settings.jsx
+│   ├── employer/
+│   │   ├── rooms/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Tasks.jsx
+│   │   │   ├── Shifts.jsx
+│   │   ├── restaurant/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Orders.jsx
+│   │   │   ├── Inventory.jsx
+│   │   ├── gym/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── TrainerSchedule.jsx
+│   │   │   ├── Classes.jsx
+│   ├── user/
+│   │   ├── Home.jsx
+│   │   ├── Rooms.jsx
+│   │   ├── Restaurant.jsx
+│   │   ├── Gym.jsx
+│   │   ├── Rewards.jsx
+│   │   ├── Profile.jsx
+│
+│── context/                # Auth & Role context
+│── hooks/                  # Custom hooks
+│── routes.js               # Role-based routes
+│── App.jsx                 # Main app with Router
+│── index.js
+```
+
+---
+
+## Routing Setup (React Router v6 Example)
+
+```jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Admin
+import AdminDashboard from "./pages/admin/Dashboard";
+import Rooms from "./pages/admin/Rooms";
+import Restaurant from "./pages/admin/Restaurant";
+import Gym from "./pages/admin/Gym";
+
+// Employer - Rooms
+import EmployerRoomsDashboard from "./pages/employer/rooms/Dashboard";
+import Tasks from "./pages/employer/rooms/Tasks";
+import Shifts from "./pages/employer/rooms/Shifts";
+
+// Employer - Restaurant
+import EmployerRestaurantDashboard from "./pages/employer/restaurant/Dashboard";
+import Orders from "./pages/employer/restaurant/Orders";
+import Inventory from "./pages/employer/restaurant/Inventory";
+
+// Employer - Gym
+import EmployerGymDashboard from "./pages/employer/gym/Dashboard";
+import TrainerSchedule from "./pages/employer/gym/TrainerSchedule";
+import Classes from "./pages/employer/gym/Classes";
+
+// Public (User)
+import Home from "./pages/user/Home";
+import RoomsPage from "./pages/user/Rooms";
+import RestaurantPage from "./pages/user/Restaurant";
+import GymPage from "./pages/user/Gym";
+import Rewards from "./pages/user/Rewards";
+import Profile from "./pages/user/Profile";
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Admin */}
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/rooms" element={<Rooms />} />
+        <Route path="/admin/restaurant" element={<Restaurant />} />
+        <Route path="/admin/gym" element={<Gym />} />
+
+        {/* Employer - Rooms */}
+        <Route path="/employer/rooms/dashboard" element={<EmployerRoomsDashboard />} />
+        <Route path="/employer/rooms/tasks" element={<Tasks />} />
+        <Route path="/employer/rooms/shifts" element={<Shifts />} />
+
+        {/* Employer - Restaurant */}
+        <Route path="/employer/restaurant/dashboard" element={<EmployerRestaurantDashboard />} />
+        <Route path="/employer/restaurant/orders" element={<Orders />} />
+        <Route path="/employer/restaurant/inventory" element={<Inventory />} />
+
+        {/* Employer - Gym */}
+        <Route path="/employer/gym/dashboard" element={<EmployerGymDashboard />} />
+        <Route path="/employer/gym/trainer-schedule" element={<TrainerSchedule />} />
+        <Route path="/employer/gym/classes" element={<Classes />} />
+
+        {/* Public/User */}
+        <Route path="/" element={<Home />} />
+        <Route path="/rooms" element={<RoomsPage />} />
+        <Route path="/restaurant" element={<RestaurantPage />} />
+        <Route path="/gym" element={<GymPage />} />
+        <Route path="/rewards" element={<Rewards />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
+
+---
+
+✅ Deliverables in this skeleton:
+
+* **Admin pages** → all modules
+* **Employer pages** → separated controllers (Rooms, Restaurant, Gym)
+* **User (Public)** → Home + services booking
+* **Folder structure** ready for scaling
+* **React Router v6** based route definitions
+
+---
+
+👉 Do you want me to **expand this prompt into actual starter code with all folders + placeholder `.jsx` and `.module.css` files**, so you can run `npm start` immediately and see role-based pages?
