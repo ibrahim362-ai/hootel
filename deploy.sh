@@ -7,14 +7,14 @@ echo "🏨 Deploying Hotel ERP System to GitHub Pages..."
 if [ ! -d ".git" ]; then
     echo "❌ Git repository not found. Please initialize git first:"
     echo "   git init"
-    echo "   git remote add origin https://github.com/yourusername/hotel-erp-system.git"
+    echo "   git remote add origin https://github.com/ibrahim362-ai/hootel.git"
     exit 1
 fi
 
 # Check if remote origin exists
 if ! git remote get-url origin > /dev/null 2>&1; then
     echo "❌ Git remote 'origin' not found. Please add your GitHub repository:"
-    echo "   git remote add origin https://github.com/yourusername/hotel-erp-system.git"
+    echo "   git remote add origin https://github.com/ibrahim362-ai/hootel.git"
     exit 1
 fi
 
@@ -40,7 +40,7 @@ echo "📋 Next steps:"
 echo "1. Go to your GitHub repository"
 echo "2. Click on 'Actions' tab to monitor deployment"
 echo "3. Once complete, your site will be available at:"
-echo "   https://yourusername.github.io/your-repository-name/"
+echo "   https://ibrahim362-ai.github.io/hootel/"
 echo ""
 echo "⚙️  To enable GitHub Pages:"
 echo "1. Go to repository Settings → Pages"

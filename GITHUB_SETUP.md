@@ -15,8 +15,8 @@ Run these commands in your terminal:
 # Initialize git (if not already done)
 git init
 
-# Add your GitHub repository (replace 'yourusername' with your actual GitHub username)
-git remote add origin https://github.com/yourusername/hotel-erp-system.git
+# Your repository is already connected to:
+# https://github.com/ibrahim362-ai/hootel
 
 # Add all files
 git add .
@@ -46,7 +46,7 @@ git push -u origin main
 
 Your site will be available at:
 ```
-https://yourusername.github.io/hotel-erp-system/
+https://ibrahim362-ai.github.io/hootel/
 ```
 
 ## Quick Deploy Script
